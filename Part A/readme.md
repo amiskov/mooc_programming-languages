@@ -4,7 +4,7 @@
 ## Установка SML
 На Маке качаем компилятор SML/NJ через Brew: `brew install smlnj`.
 
-Теперь в терминале можно запускать команду `sml`.
+Теперь в терминале можно запускать команду `sml`. **Выход через `Ctrl+Z`**, обычный `Ctrl+C` не прохляет.
 
 ## Настройка Sublime Text 3
 Для комфортной работы с SML понадобиться [соответствующий Package](https://github.com/seanjames777/SML-Language-Definition#installation). Только билд по `F7` будет криво работать, если установить его через Package Control. Лучше склонировать руками:
@@ -27,3 +27,4 @@ PATH=$SEARCH:$COMMON_LOCATIONS:$PATH
 
 sml "$1"
 ```
+

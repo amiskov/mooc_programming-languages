@@ -9,16 +9,12 @@ REPL — Read-Eval-Print-Loop.
 
 На ML похожи: OCaml, F#, Scala, Haskell.
 
-## Recommended Background
-
-## Why Part A, Part B, Part C
-
 ## Оценки
 Домашка отправляется все целиком, нельзя проверить по частям. Педагогическая причина — делай все, что можешь, чтоб получилось. Надо взять на вооружение.
 
 ## ML
-Используется [SML](http://www.smlnj.org).
+Используется [SML/NJ](http://www.smlnj.org).
 
-Установит SML в Sublime из PackageControl и компилятор из Brew `smlnj`.
+Установить [SML в Sublime из PackageControl](../readme.md) и компилятор из Brew `smlnj`.
 
 Выход: `Ctrl+Z`.

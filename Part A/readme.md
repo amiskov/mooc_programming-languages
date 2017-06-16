@@ -7,7 +7,7 @@
 Теперь в можно запускать команду `sml`.
 
 ## Настройка Sublime Text 3
-Для комфортной работы с SML понадобиться Package. Только билд по `F7` будет криво работать, если установить его через Package Control. Нужно пакет склонировать руками:
+Для комфортной работы с SML понадобиться [соответствующий Package](https://github.com/seanjames777/SML-Language-Definition#installation). Только билд по `F7` будет криво работать, если установить его через Package Control. Лучше склонировать руками:
 
 ```bash
 cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages

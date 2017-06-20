@@ -193,6 +193,111 @@ fun sum_list(xs : int list) =
 val sum = sum_list([1, 2, 3])
 ```
 
+Функции для работы со списками как правило рекурсивны. Обычно в решении нужно указать, что вернуть, когда список пуст и что сделать, когда список не пуст in terms of the tail of that list.
 
+## Let Expressions
+Локальные переменные. Видимые только в функции.
 
+```ml
+(* let b1 b2 ... bn in e *)
+fun silly1 (z : int) = (* int -> int *)
+    let val x = if z > 0 then z else 34
+        val y = x+z+9
+    in
+        if x > y then x*2 else y*y
+    end
+```
 
+Ограничение скоупа. Что внутри `let` не видно с наружи.
+
+## Nested Functions
+Вложенные функции нужно использовать, когда они не нужны никому, кроме текущий функции. Им доступно окружение родительской функции. Инкапсулируя хелпер-функцию мы делаем код более стабильным и логичным.
+
+## Let and Efficiency
+
+## Options
+
+## Booleans and Comparison Operations
+`e1 andalso e2` — обычно пишут `&&` в современных языках.
+
+`e1 orelse e2` — теперь пишут `||`.
+
+`not e1` — аналогично `!e1`. `!` в ML работает, относится к мутациям.
+
+`=` — сравнение на равенство. Один знак `=`, не два, как часто бывает.
+
+`<>` — на неравенство. Сейчас обычно юзают `!=`.
+
+Нельзя сравнивать `int` и `real` с помощью `<`, `>`, `<=`, `>=`. Тип должен быть одинаковый. Надо конвертить: `Real.fromInt 2; (* => 2.0 *)`.
+
+`=` и `<>` нельзя использовать на типе `real`. ML предполагает, что мы будем сравнивать их более математически.
+
+## Benefits of No Mutation
+В функциональных языках нельзя переопределить однажды созданные данные. Только создать новую копию.
+
+```ml
+val x = [1, 2, 3];
+val y = x;
+x = y; (* true *)
+
+val y = 4::y;
+x = y; (* false *)
+```
+
+```js
+const x = [1, 2, 3];
+const y = x;
+console.log(y == x); // true
+
+y.push(4);
+console.log(y == x); // true, оба поменялись
+```
+
+## Optional: Java Mutation
+
+## Pieces of a Language
+Как изучить язык программирования?
+
+* Синтаксис: как оно пишется.
+* Семантика: как происходят вычисления (что делает интерпретатор/компилятор), как происходит проверка типов.
+* Идиомы: устоявшиеся конструкции языка. Когда лучше написать `return a || b;`, а когда применять `if/else`. Когда использовать function declaration, когда function expression и пр. Типичные паттерны использования языковых конструкций.
+* Библиотеки. Для работы с нужной областью: файловая система, данные и пр.
+* Инструменты для работы с языком. Типа REPL. К самому языку не относятся.
+
+# Hints and Gotchas
+Краткое содержание недели из Community-contributed Resources.
+
+## Notes on material
+* Clear your mind of any preconceived notions of programming ideas.
+* Download the reading notes!
+* For strings, you have to use double-quote ", and not single-quote '.
+* Unary minus is denoted by a tilde `~`.
+* Test for equality is a single equals `=`` instead of double `==`.
+* Every `if ... then` must also have an `else`.
+* You need a `val` or `fun` for anything defined at the "top" level (or anywhere else).
+* Always restart the REPL before use-ing the same file twice.
+* There are no "assignments", there are "variable bindings". Understand the difference and how shadowing works.
+* Types are indicated via a colon after the variable — they are often optional (SML can infer them).
+* Forget `for/while` loops; you can do the same with recursion instead.
+* Functions are values! (Make sure to understand how it is "evaluated".)
+* The type of a tuple `(𝟸𝟹, 𝟹𝟺)` is denoted as `int * int`.
+* Function types are denoted by `->`.
+* Need to define a "local" variable in a function? Use `let...in...end`.
+* "and" is done via `andalso`, "or" via `orelse`.
+* "not equal" is `<>`.
+* You cannot directly do arithmetic on an `int` and a `real`.
+
+## Notes on the assignment
+* Read assignment directions very carefully.
+* Examine the required types of the functions, found on the "summary" section of the notes, page 2. Understand why those are the types. Make sure your implementations have those types.
+* Don't use pattern matching on this assignment.
+* Don't use features or library functions not described in the lectures/notes (except for places where the assignment specifies). In particular, you cannot use any of the `List` structure's functions.
+* Write tests for your functions!
+* If your problem returns a boolean, oftentimes you can get by with just `andalso` and `orelse`, without needing `if-then-else`. At the very least, avoid `if e then true else false`.
+* Avoid recomputing a value when possible. Using `#𝟷`, `#𝟸`, `hd`, and `tl` doesn't really cost anything, but other computations should probably be stored if they are repeated.
+* Most functions (with the exception of challenge problems) have bodies in the range of 3-8 lines.
+* Make sure your functions are spelled correctly!
+* You need to deal with empty lists as a possibility, do not assume they are non-empty.
+* In general, do not make assumptions that are not explicitly stated in the assignment (if in doubt, ask in the forums!).
+* Take care to think of what "older" and "oldest" means for dates.
+* Don't forget to submit in two places! Normal assignment, and peer review.

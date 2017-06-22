@@ -17,4 +17,4 @@ REPL — Read-Eval-Print-Loop.
 
 Установить [SML в Sublime из PackageControl](../readme.md) и компилятор из Brew `smlnj`.
 
-Выход: `Ctrl+Z`.
+Выход: `Ctrl+D`.

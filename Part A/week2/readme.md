@@ -1,3 +1,9 @@
+# Неделя I
+* [Краткое содержание в ПДФ](resources/section1sum.pdf).
+* [Код из лекций](resources/section1_video_code_files).
+* [Мой код](code), что написал по ходу просмотра.
+* [Домашка](homework1).
+
 ## ML Variable Bindings and Expressions
 В контексте курса нужно воспринимать ML как совершенно новый язык и не примешивать уже имеющийся опыт.
 

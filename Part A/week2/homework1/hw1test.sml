@@ -3,20 +3,20 @@ These are basic test cases. Passing these tests does not guarantee that your cod
 To run the test, add a new line to the top of this file: use "homeworkname.sml";
 All the tests should evaluate to true. For example, the REPL should say: val test1 = true : bool *)
 
-(*use "my-solutions/1_is_older.sml";
+use "my-solutions/1_is_older.sml";
 use "my-solutions/2_number_in_month.sml";
 use "my-solutions/3_number_in_months.sml";
 use "my-solutions/4_dates_in_month.sml";
 use "my-solutions/5_dates_in_months.sml";
 use "my-solutions/6_get_nth.sml";
+
 use "my-solutions/7_date_to_string.sml";
 use "my-solutions/8_number_before_reaching_sum.sml";
 use "my-solutions/9_what_month.sml";
 use "my-solutions/10_month_range.sml";
 use "my-solutions/11_oldest.sml";
-*)
 
-use "my-solutions/for_submit.sml";
+(*use "my-solutions/for_submit.sml";*)
 
 val test1 = is_older ((1,2,3),(2,3,4)) = true
 val test2 = number_in_month ([(2012,2,28),(2013,12,1)],2) = 1

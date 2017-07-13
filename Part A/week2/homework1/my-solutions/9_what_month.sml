@@ -11,5 +11,6 @@ val month_durations = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 fun what_month(day : int) =
     number_before_reaching_sum(day, month_durations) + 1
-
+    
 (*val test9 = what_month 70 = 3*)
+

@@ -6,10 +6,11 @@ which is okay.
 *)
 
 fun get_nth(strs : string list, n : int) =
-    if n = 1
+    if n <= 1 (* Тут лучше нестрогое неравенство *)
     then hd(strs)
     else get_nth(tl(strs), n - 1)
 
-(*val test1 = get_nth (["hi", "there", "how", "are", "you"], 2) = "there"
+val test1 = get_nth (["hi", "there", "how", "are", "you"], 2) = "there"
 val test2 = get_nth (["ololo", "test", "gsom", "vasya"], 1)
-*)    
+val test3 = get_nth (["ololo", "test", "gsom", "vasya"], 0)
+    

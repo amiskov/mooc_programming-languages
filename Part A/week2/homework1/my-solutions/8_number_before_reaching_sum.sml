@@ -9,6 +9,7 @@ Assume the entire list sums to more than the passed in value;
 it is okay for an exception to occur if this is not the case.
 *)
 
+(* Тут вообще пиздец *)
 fun number_before_reaching_sum(sum : int, lst : int list) = (* -> int *)
     if null lst 
     then 0
@@ -20,7 +21,13 @@ fun number_before_reaching_sum(sum : int, lst : int list) = (* -> int *)
                 else acc(counter + 1, sum_inner + hd(lst_inner), tl(lst_inner))
         in
             acc(0, 0, lst)
-        end 
+        end
+
+(* Надо так: *)
+fun right_number_before_reaching_sum (sum : int, lst : int list) =
+    if sum <= hd lst
+    then 0
+    else 1 + number_before_reaching_sum(sum - hd lst, tl lst)        
 
 (*
 В этой задаче поможет расписать итерации внутренней рекурсии (acc):

@@ -15,7 +15,9 @@ July, August, September, October, November, December.
 val month_names = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
 
-fun date_to_string(year:int, month:int, day:int) =
+(* Надо аргументом передавать! Иначе функция нечистая получается. *)
+(* Или запихать названия месяцев вовнутрь *)
+fun date_to_string(year:int, month:int, day:int) = (* Почему тут инты? Надо (int * int * int) *)
     get_nth(month_names, month) ^ " " ^ Int.toString(day) ^ ", " ^ Int.toString(year)
 
 (*val test7 = date_to_string (2013, 6, 1) = "June 1, 2013"*)

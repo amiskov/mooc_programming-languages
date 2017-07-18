@@ -3,7 +3,7 @@ datatype mytype =
     | Str of string
     | Pizza;
 
-fun f(x : mytype) = (* можно просто `fun x` *)
+fun f (x : mytype) = (* можно просто `fun x` *)
     case x of
         (* Дальше идет pattern matching:
         Проверить паттерн слева, если он подходит `x`, то создать локальные

@@ -1,4 +1,4 @@
-# Неделя II
+# Неделя III
 * Создаем свои типы и работаем с ними:
 * составные данные
 * pattern matching
@@ -109,4 +109,71 @@ fun sum_list xs =
 ## Polymorphic Datatypes
 Списки (list) на самом деле имеют тип `'a list` (альфа-лист). И уже при объявлении они становятся `int list`, `string list` и т. д. То есть `list` это такая фабрика типов.
 
+## Each of Pattern Matching / Truth About Functions
+Паттерн-матчинг позволяет обойтись без явного указания типов. При сопоставлении тайп-чекер сам все поймет:
+
+```sml
+fun sum_triple3 (x, y, z) = x + y + z;
+fun full_name3 {first=x, middle=y, last=z} = x ^ " " ^ y ^ " " ^z;
+
+val x = sum_triple3(1, 2, 3);
+val y = full_name3({first="Andrey", middle="Y.", last="Miskov"});
+```
+
+Функции в ML принимают **только один аргумент** и потом используют паттерн-матчинг. Такая запись: `fun sum_triple(x, y, z)` принимает и кортеж из трех элементов и это выглядит типа как аргументы функции. На самом деле функция всегда принимает только один аргумент и у него уже есть свой тип.
+
+Даже функция `fun hello() = ...` принимает 1 аргумент. Тип `unit`.
+
+## A Little Type Inference
+Можно делать так:
+
+```sml
+fun partial_sum (x, y, z) = 
+    x + z (* `y` не используется, это нормально *)
+```
+
+Т. к. `y` не используется, ML дает ему тип `'a` (альфа) и мы можем передавать вторым аргументом (на самом деле вторым элементом кортежа, т. к. в функциях всего 1 аргумент) значение любого типа. Unexpected polymorphism.
+
+## Polymorphic and Equality Types
+ML не дает сравнивать `real`-числа с помощью равенства. `real` is not an equality type. [Тут](http://sml-family.org/Basis/real.html) внизу есть рассуждения на эту тему.
+
+```sml
+(* has type ''a * ''a -> string *)
+fun same_thing(x,y) = if x=y then "yes" else "no" 
+```
+
+Так тайп-чекер не поймет, какой тип будет передаваться. Он скажет `Warning: calling polyEqual`. Передано может быть что угодно и ты рискуешь сравнивать, например, строку с интом, что повлечет ошибку.
+
+## Nested Patterns
+
+
+## More Nested Patterns
+```sml
+fun nondecreasing xs =
+    case xs of
+    [] => true
+      | _::[] => true
+      | head::(neck::rest) => (head <= neck andalso nondecreasing (neck::rest))
+```
+
+`head::(neck::tail)` matches list witn 2 or more elements.
+
+`_::[] => true` — если справа от `=>` переменная не используется, то принято ее обозначать `_`.
+
+Хороший стиль кода:
+* Избегать вложенных `case ... of`. Лучше использовать больше бранчей на первом уровне с вложенным pattern matching. См. `unzip3`, `nondecreasing`.
+* Часто полезно делать матчинг на кортежах. См. `zip3`, `multsign`.
+* Wildcards instead of variables (использовать `_`, если переменная справа от `=>` не используется). См. `len`, `multsign`.
+
+## Nested Patterns Precisely
+
+## Function Patterns
+
+## Exceptions
+
+## Tail Recursion
+Надо аккуратно с рекурсивными аппендами. Там хвостовая оптимизация критична.
+
+## Perspective on Tail Recursion
+При обработке деревьев хвостовая оптимизация не даст преимущества. Все равно надо где-то сохранять данные, а это соизмеримо с заполнением стэка.
 

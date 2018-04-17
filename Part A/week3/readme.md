@@ -1,4 +1,4 @@
-# Неделя III
+# Неделя III: Datatypes, pattern-matching, tail recursion
 * Создаем свои типы и работаем с ними:
 * составные данные
 * pattern matching

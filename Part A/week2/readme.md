@@ -1,4 +1,4 @@
-# Неделя I
+# Неделя II: Basics, functions, recursion, scope, variables, tuples, lists, ...
 * [Краткое содержание в ПДФ](resources/section1sum.pdf).
 * [Код из лекций](resources/section1_video_code_files).
 * [Мой код](code), что написал по ходу просмотра.

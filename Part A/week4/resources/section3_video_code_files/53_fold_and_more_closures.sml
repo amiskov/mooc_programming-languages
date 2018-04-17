@@ -5,14 +5,15 @@
 
 (* note this is "fold left" if order matters 
    can also do "fold right" *)
-fun fold (f,acc,xs) =
+fun fold (f, acc, xs) =
     case xs of 
 	[] => acc
-      | x::xs' => fold (f,f(acc,x),xs')
+      | x::xs' => fold (f, f(acc, x), xs')
 
 (* examples not using private data *)
 
 fun f1 xs = fold ((fn (x,y) => x+y), 0, xs)
+val t = f1([1, 2, 3, 4]);
 
 fun f2 xs = fold ((fn (x,y) => x andalso y >= 0), true, xs)
 

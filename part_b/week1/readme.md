@@ -84,7 +84,8 @@ Racket похож на Scheme, пошел от него. Синтаксис ми
 (cdr my-list1) ; '(2 3)
 ```
 
-Пример — сумма элементов списка:
+## Примеры
+Функция, суммирующая элементы списка:
 
 ```scheme
 (define (sum numbers)
@@ -94,5 +95,19 @@ Racket похож на Scheme, пошел от него. Синтаксис ми
 (sum (list 1 2 3 4)) ; 10
 ```
 
+Функция `my-append`, которая добавляет один список в конец другого:
 
+```scheme
+(define (my-append2 xs ys)
+  (if (null? xs) ys
+      (cons (car xs) (my-append2 (cdr xs) ys))))
+```
+
+Функция `my-map`, которая пройдется по всем элементам списка и к каждому применит переданную функцию:
+
+```scheme
+(define (my-map xs fn)
+  (if (null? xs) xs
+      (cons (fn (car xs)) (my-map (cdr xs) fn))))
+```
 

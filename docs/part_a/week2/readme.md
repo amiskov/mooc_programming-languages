@@ -12,7 +12,7 @@
 См. [слайды](resources/3_ML_expressions_and_variable_bindings.pdf).
 
 ### Синтаксис объявления (привязки, binding) переменных
-```sml
+```fsharp
 (* Variable bindings, see `first.sml` *)
 val x = 34;
 val y = 17;
@@ -28,7 +28,7 @@ ML — статически типизированный язык: до вып�
 
 Что происходит в программе при объявлении переменных:
 
-```sml
+```fsharp
 val x = 34;
 (* static environment: x : int *)
 (* dynamic environment: x --> 34 *)
@@ -45,7 +45,7 @@ val z = (x + y) + (y + 2);
 
 Условия. `then` и `else` должны иметь одинаковый тип:
 
-```sml
+```fsharp
 val abs_of_z = if z < 0 then 0 - z else z;
 (* static environment: ..., `z < 0` : bool, then/else : int, abs_of_z : int *)
 (* dynamic environment: ..., abs_of_z --> 70 *)

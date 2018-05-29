@@ -1,0 +1,25 @@
+{
+  "name": "mooc_programming-languages",
+  "version": "1.0.0",
+  "description": "https://www.coursera.org/learn/programming-languages/",
+  "main": "index.js",
+  "dependencies": {
+    "vuepress": "^0.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amiskov/mooc_programming-languages.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amiskov/mooc_programming-languages/issues"
+  },
+  "homepage": "https://github.com/amiskov/mooc_programming-languages#readme"
+}

@@ -10,7 +10,7 @@ vuepress build
 cd .vuepress/dist
 
 # if you are deploying to a custom domain
-echo 'andreymiskov.ru' > CNAME
+# echo 'andreymiskov.ru' > CNAME
 
 git init
 git add -A

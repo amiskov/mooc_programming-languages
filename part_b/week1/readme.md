@@ -217,7 +217,7 @@ Racket похож на Scheme, пошел от него. Синтаксис ми
 
 Если так получится, что ни одно условие не выполнится и никакой результат не вернется, то `cond` вернет что-то странное и это плохо. Нужно следить, чтобы условия выполнялись. Поэтому хорошим тоном считается, чтобы последнее условие было `#t`:
 
-```scheme
+```lisp
 (define (sum4 xs)
   (cond [(null? xs) 0]
         [(number? (car xs)) (+ (car xs) (sum4 (cdr xs)))]
@@ -229,7 +229,7 @@ Racket похож на Scheme, пошел от него. Синтаксис ми
 
 **Выражение для `if` и `cond` не обязательно должно возвращать `#t` или `#f`**. Все, что не `#f` будет считаться `#t`. Только так. Пустой список, ноль — все тоже будет `#t`:
 
-```scheme
+```lisp
 (cond [null (display "hello")]) ; выведет "hello", хоть в условии `null`
 ```
 
@@ -237,7 +237,7 @@ Racket похож на Scheme, пошел от него. Синтаксис ми
 
 Пример — функция, которая считает, сколько раз `#f` встречается в списке:
 
-```scheme
+```lisp
 (define (count-falses xs)
   (cond [(null? xs) 0]
         [(car xs) (count-falses (cdr xs))] ; если (car xs) не `#f`, (car xs) can have any type
@@ -245,3 +245,111 @@ Racket похож на Scheme, пошел от него. Синтаксис ми
 ```
 
 ## Local Bindings
+См. `90_local_bindings.rkt`.
+
+В Ракете есть несколько видов `let`-выражений:
+
+- `let` — используется только текущее окружение, без предыдущих байнингов.
+- `let*` — учитывают предыдущие байндинги.
+- `letrec` — позволяет использовать поздние связывания в функциях. Объявляя функцию с переменными, которые объявляются позже, мы не запускаем ее.
+- `define` — аналогично `letrec`.
+
+Традиционный стиль — юзать `let`, `let*` и `letrec`. Но сейчас в Ракете принято использовать `define`, это считается хорошим стилем.
+
+Выбор — хорошо. Семантика каждой конструкции подходит под разные случаи, код программы становится более очевидным. Если не важно, какую использовать, используют `let`.
+
+Пример:
+
+```lisp
+(let (<bindings>)
+     (body))
+```
+
+Объявление переменных обычно делают в квадратных скобках:
+
+```lisp
+(let ([x2 e1]
+      [x2 e2])
+     (<body with x1 x2 etc>))
+```
+
+Пример программы:
+
+```lisp
+(define (max-of-list xs)
+  (cond [(null? xs) (error "max-of-list given empty list")] ; ключевое слово для обозначения ошибок
+        [(null? (cdr xs)) (car xs)]
+
+        ; чтоб дважды не вычислять максимум, сохраним его в переменную
+        [#t (let ([tlans (max-of-list (cdr xs))])
+              (if (> tlans (car xs))
+                  tlans
+                  (car xs)))]))
+
+(max-of-list (list 1 2 3 4 5)) ; 5
+```
+
+Это же на JS:
+
+```js
+const maxOfList = nums => {
+    const [head, ...tail] = nums
+
+    if (nums.length === 0) {
+        return 'Given an empty list.'
+    }
+
+    if (tail.length === 0) {
+        return head
+    }
+
+    const max = maxOfList(tail) // чтоб дважды не вычислять максимум, сохраним его в переменную
+    return (max > head) ? max : head
+}
+
+console.log(maxOfList([2, 0, 6])); // 6
+console.log(maxOfList([])); // Given an empty list
+console.log(maxOfList([3])); // 3
+```
+
+### `let`
+`let` вычисляет все выражения используя внешнее окружение, без использования уже существующих связываний (использует аргументы):
+
+```lisp
+; let evaluates all expressions using outer environment, 
+; *not* earlier bindings
+(define (double1 x)  ; аргумент x
+  (let ([x (+ x 3)]  ; x = аргумент x
+        [y (+ x 2)]) ; y = тоже аргумент x, без добавленной тройки
+    (+ x y -5)))     ; получится то же, что x + x
+```
+
+### `let*`
+`let*` учитывает предыдущие связывания:
+
+```lisp
+; let* is like ML's let: environment includes previous bindings
+(define (double2 x)
+  (let* ([x (+ x 3)]
+         [y (+ x 2)]) ; тут x придет из предыдущей строки и y = x + 3 + 2
+    (+ x y -8)))
+```
+
+### `letrec`
+`letrec` позволяет использовать в функциях переменные, объявленные позднее:
+
+```lisp
+; letrec uses an environment where all bindings in scope
+; * like ML's use of and for mutual recursion
+; * you get an error if you use a variable before it's defined
+;   where as always function bodies not used until called
+;   (bindings still evaluated in order)
+; (In versions of Racket before 6.1, you got an #<undefined> value instead,
+;  which would typically cause an error as soon as you used it.)
+(define (triple x)
+  (letrec ([y (+ x 2)]
+           [f (lambda (z) (+ z y w x))]
+           [w (+ x 7)])
+    (f -9)))
+```
+

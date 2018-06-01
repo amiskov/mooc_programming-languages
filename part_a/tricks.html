@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Programming Languages | Part A Tips and Tricks</title>
+    <meta name="description" content="Introduction to the basic concepts of programming languages, with a strong emphasis on functional programming">
+    
+    
+    <link rel="preload" href="/mooc_programming-languages/assets/css/15.styles.8efdc787.css" as="style"><link rel="preload" href="/mooc_programming-languages/assets/js/app.714dd42c.js" as="script"><link rel="preload" href="/mooc_programming-languages/assets/js/9.bb37c069.js" as="script"><link rel="prefetch" href="/mooc_programming-languages/assets/js/8.97e73b7e.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/0.f2a67aba.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/1.bb4140c1.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/2.edeaf33a.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/3.11e2dcc8.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/4.b1cfe98e.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/5.7a978539.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/6.584ee8de.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/7.1836f1f6.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/10.51633e73.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/11.e1e70170.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/12.a10c393e.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/13.f60d3459.js"><link rel="prefetch" href="/mooc_programming-languages/assets/js/14.798ee97c.js">
+    <link rel="stylesheet" href="/mooc_programming-languages/assets/css/15.styles.8efdc787.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/mooc_programming-languages/" class="home-link router-link-active"><!----><span class="site-name">
+      Programming Languages
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><!----></div></header><div class="sidebar-mask"></div><div class="sidebar"><!----><ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>Part A (ML)</span><!----></p><ul class="sidebar-group-items"><li><a href="/mooc_programming-languages/part_a/" class="sidebar-link">Введение</a></li><li><a href="/mooc_programming-languages/part_a/week1/" class="sidebar-link">Welcome Information</a></li><li><a href="/mooc_programming-languages/part_a/week2/" class="sidebar-link">Неделя II: Basics, functions, recursion, scope, variables, tuples, lists, ...</a></li><li><a href="/mooc_programming-languages/part_a/week3/" class="sidebar-link">Неделя III: Datatypes, pattern-matching, tail recursion</a></li><li><a href="/mooc_programming-languages/part_a/week4/" class="sidebar-link">Неделя IV: First-Class Functions, closures</a></li><li><a href="/mooc_programming-languages/part_a/week5/" class="sidebar-link">Неделя V: Type inference, modules, equivalence</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>Part B (Racket)</span><!----></p><ul class="sidebar-group-items"><li><a href="/mooc_programming-languages/part_b/" class="sidebar-link">Введение</a></li><li><a href="/mooc_programming-languages/part_b/week1/" class="sidebar-link">Неделя I</a></li></ul></div></li></ul></div><div class="page"><div class="content"><h1 id="part-a-tips-and-tricks"><a href="#part-a-tips-and-tricks" aria-hidden="true" class="header-anchor">#</a> Part A Tips and Tricks</h1><h2 id="как-вызвать-функцию-в-файnе-чтоб-проверить"><a href="#как-вызвать-функцию-в-файnе-чтоб-проверить" aria-hidden="true" class="header-anchor">#</a> Как вызвать функцию в файле, чтоб проверить?</h2><p>В ML функцию нельзя просто так взять и вызвать. Функция в ML должна что-то вернуть и это что-то нужно куда-то сохранить. Поэтому так:</p><div class="language-ml extra-class"><pre class="language-text"><code>fun append(xs : int list, ys : int list) = 
+    if null xs
+    then ys
+    else (hd xs) :: append((tl xs), ys)
+
+val a = append([1, 2, 3], [4, 5, 6]);
+</code></pre></div><h2 id="list-functions"><a href="#list-functions" aria-hidden="true" class="header-anchor">#</a> List Functions</h2><p>Когда мы суммируем элементы списка, то получается:</p><div class="language-ml extra-class"><pre class="language-text"><code>fun sum_list(xs : int list) =
+    if null xs
+    then 0 (* возвращаем 0 на пустом списке *)
+    else hd xs + sum_list(tl xs)
+
+val sum = sum_list([1, 2, 3])
+</code></pre></div><p>Если сразу после этой задачи сказать &quot;реализуйте аналогичным образом умножение элементво списка&quot;, то можно напороться на то, что все время будет 0. Это потому, что на <code>null xs</code> надо возвращать <code>1</code>:</p><div class="language-ml extra-class"><pre class="language-text"><code>fun list_product(xs : int list) =
+    if null xs
+    then 1 (* не 0, потому что в конце идет умножение, а не сложение *)
+    else hd xs * list_product(tl xs)
+
+val product = list_product([2, 3, 4])
+</code></pre></div><h2 id="подкnючение-модуnей"><a href="#подкnючение-модуnей" aria-hidden="true" class="header-anchor">#</a> Подключение модулей</h2><p>Если в файле <code>module2.sml</code> подключить файл <code>module1.sml</code>:</p><div class="language-sml extra-class"><pre class="language-text"><code>(* module2.sml *)
+use &quot;module1.sml&quot;;
+
+module1_func();
+</code></pre></div><p>то в третьем файле <code>module3.sml</code>, который подключает <code>module2.sml</code> будет ошибка:</p><div class="language-sml extra-class"><pre class="language-text"><code>(* module3.sml - wrong *)
+use &quot;module2.sml&quot;; (* Fatal error *)
+
+module1_func();
+module2_func();
+</code></pre></div><p>Если в <code>module3.sml</code> нужно использовать функцию из <code>module1.sml</code>, то его нужно подключать в <code>module3.sml</code> напрямую, а в <code>module2.sml</code> убрать:</p><div class="language-sml extra-class"><pre class="language-text"><code>(* module3.sml - ok *)
+use &quot;module1.sml&quot;;
+use &quot;module2.sml&quot;;
+
+module1_func();
+module2_func();
+</code></pre></div><p>Не умеет SML резолвить модули в иерархии подключений.</p><h2 id="бесконечная-рекурсия"><a href="#бесконечная-рекурсия" aria-hidden="true" class="header-anchor">#</a> Бесконечная рекурсия</h2><p>Если написать бесконечную рекурсию типа:</p><div class="language-sml extra-class"><pre class="language-text"><code>fun range(x1 : int, x2 : int) = 
+    if x1 &gt; x1 (* ошибка, должно быть x1 &gt; x2 *)
+    then []
+    else x1::range(x1 + 1, x2)
+</code></pre></div><p>То компилятор будет ее гонять бесконечно. Тут переполнения стэка нет, просто бесконечно добавляется в список значение. И даже после <code>Ctrl+D</code> в консоли процессор пожирался, приходилось перезагружать машину.</p><h2 id="запятые"><a href="#запятые" aria-hidden="true" class="header-anchor">#</a> Запятые</h2><p>Нужно ставить точку с запятой после вызова функции перед объявлением следующей, иначе будет ошибка:</p><div class="language-sml extra-class"><pre class="language-text"><code>fun sum_list xs =
+    case xs of
+        [] =&gt; 0
+      | x::xs' =&gt; x + sum_list xs'
+sum_list [1, 2, 3]; (* Тут `;` нужна, иначе будет ошибка)
+
+fun append ...
+
+</code></pre></div></div><div class="content edit-link"><!----><!----></div><!----></div></div></div>
+    <script src="/mooc_programming-languages/assets/js/9.bb37c069.js" defer></script><script src="/mooc_programming-languages/assets/js/app.714dd42c.js" defer></script>
+  </body>
+</html>
